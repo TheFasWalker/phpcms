@@ -12,7 +12,7 @@ if (isset($_POST['submit'])){
         $user->setLogin($_POST['login']);
         $userProvider = new UserProvider($pdo);
         $userProvider->registerUser($user, $_POST['password']);
-        header('Location: /?refresh='.time());
+        header('Location: /?controller=userlist');
         exit;
     }else{
         $error = 'Некорректные данные';
