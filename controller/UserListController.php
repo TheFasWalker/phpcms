@@ -7,4 +7,15 @@ $titleH1 = 'UserListPage';
 $error=null;
 $userList = new UserProvider($pdo)->getAllUsers();
 
+
+if(isset($_POST['name'], $_POST['login'], $_POST['password'] )){
+    $user = new User($_POST['name']);
+    $user->setLogin($_POST['login']);
+    $userProvider = new UserProvider($pdo);
+    $userProvider->registerUser($user, $_POST['password']);
+    header('Location : /?refresh='.time());
+}else{
+    $error = 'Некорректные данные';
+}
+
 include_once('views/userList.php');
