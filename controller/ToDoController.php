@@ -38,4 +38,10 @@ if(isset($_GET['deleteTask'])){
         header('Location: /?controller=todolist');
     }
 }
+if(isset($_GET['toggleState'])){
+    $toDoProvider = new ToDoProvider($pdo);
+    if($toDoProvider->toggleToDo($_GET['toggleState'])){
+        header('Location: /?controller=todolist');
+    }
+}
 include_once('views/toDoList.php');
