@@ -32,5 +32,10 @@ if(isset($_POST['submit'])){
     }
     
 }
-
+if(isset($_GET['deleteTask'])){
+    $toDoProvider = new ToDoProvider($pdo);
+    if($toDoProvider->deleteTaskById($_GET['deleteTask'])){
+        header('Location: /?controller=todolist');
+    }
+}
 include_once('views/toDoList.php');

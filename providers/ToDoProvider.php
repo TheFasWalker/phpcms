@@ -34,5 +34,17 @@ class ToDoProvider
         $statment->execute();
         return $statment->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function deleteTaskById(int $id): bool{
+        try{
+            $statment= $this->pdo->prepare(
+                'DELETE FROM tasks WHERE id = ?'
+        );
+        $statment->execute([$id]);
+        return $statment->rowCount() > 0;
+        }catch (PDOException $e) {
+            error_log("Error deleting user: " . $e->getMessage());
+            return false;
+        }
 
+    }
 }
