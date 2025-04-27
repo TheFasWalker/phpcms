@@ -6,8 +6,12 @@ $title='ToDoListPage';
 $titleH1 = 'ToDoListPage';
 $userData = null;
 $error = null;
+$tasksList = null;
 if(isset($_SESSION['name'])){
     $userData = $_SESSION['name'];
+}
+if(isset($_SESSION['login'])){
+    $tasksList = new ToDoProvider($pdo)->getTasksByAuthor($_SESSION['login']);
 }
 
 if(isset($_POST['submit'])){
