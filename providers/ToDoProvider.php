@@ -27,5 +27,12 @@ class ToDoProvider
         $statment->execute([$author]);
         return $statment->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getAllTasks():array{
+        $statment= $this->pdo->prepare(
+            'SELECT id, desc, isDone FROM tasks WHERE author = ?'
+        );
+        $statment->execute();
+        return $statment->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 }

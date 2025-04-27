@@ -12,6 +12,8 @@ if(isset($_SESSION['name'])){
 }
 if(isset($_SESSION['login'])){
     $tasksList = new ToDoProvider($pdo)->getTasksByAuthor($_SESSION['login']);
+}else{
+    $tasksList = new ToDoProvider($pdo)->getAllTasks();
 }
 
 if(isset($_POST['submit'])){
