@@ -3,4 +3,7 @@
 
 Для визуала используется tailwindCss с компонентами из  библиотеки <a href="https://flowbite.com/">Flowbite</a>
 
-Запуск проекта php -S localhost:3000 index.php
+Запуск проекта `php -S localhost:3000 index.php`
+
+При первом запуске нужно создать БД с дефолтным пользователем  `php fixture.php`
+
