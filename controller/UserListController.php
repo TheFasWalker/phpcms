@@ -1,11 +1,16 @@
 <?php
 require_once('providers/UserProvider.php');
-
+session_start();
 $pdo = require 'db.php';
 $title='UserListPage';
 $titleH1 = 'UserListPage';
 $error=null;
 $userList = new UserProvider($pdo)->getAllUsers();
+$userData = null;
+if(isset($_SESSION['name'])){
+    $userData = $_SESSION['name'];
+}
+
 if (isset($_POST['submit'])){
     if(isset($_POST['name'], $_POST['login'], $_POST['password'] )){
         $user = new User($_POST['name']);

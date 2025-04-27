@@ -3,10 +3,14 @@ require_once('providers/UserProvider.php');
 $pdo = require 'db.php';
 $title='authPage';
 $titleH1 = 'Autorization';
-
+$userData = null;
 
 session_start();
 $error=null;
+
+if(isset($_SESSION['name'])){
+    $userData = $_SESSION['name'];
+}
 
 
 if (isset($_POST['submit'])){
