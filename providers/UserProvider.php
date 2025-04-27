@@ -25,4 +25,16 @@ class UserProvider
         }
         return $userData;
     }
+    public function registerUser(User $user, string $password): bool
+    {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $statment = $this->pdo->prepare(
+            'INSERT INTO users (name, login, password) VALUES (:name, :login, :password)'
+        );
+        return $statment->execute([
+            'name'=>$user->getName(),
+            'login'=>$user->getLogin(),
+            'password'=>$hashedPassword
+        ]);
+    }
 }
