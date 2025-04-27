@@ -18,4 +18,12 @@ if(isset($_POST['name'], $_POST['login'], $_POST['password'] )){
     $error = 'Некорректные данные';
 }
 
+if (isset($_GET['delete'])){
+    var_dump($_GET['delete']);
+    $userProvider = new UserProvider($pdo);
+    $result = $userProvider->deleteUserById($_GET['delete']);
+    header('Location : /?controller=userlist');
+
+    
+}
 include_once('views/userList.php');

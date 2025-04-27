@@ -57,10 +57,15 @@
                             foreach ($userList as $user) : ?>
                                 <tr class="border-b dark:border-gray-700">
                                     <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"><?=$user['id'] ?></th>
-                                    <td class="px-4 py-3"><?=$user['name'] ?></td>
                                     <td class="px-4 py-3"><?=$user['login'] ?></td>
+                                    <td class="px-4 py-3"><?=$user['name'] ?></td>
                                     <td class="px-4 py-3 max-w-[12rem] truncate"></td>
-                                    <td class="px-4 py-3"></td>
+                                    <td class="px-4 py-3">
+                                        <a class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" 
+                                        href="/?controller=userlist&delete=<?=$user['id']?>"
+                                        >delete
+                                        </a>
+                                    </td>
                                 </tr>
                         <?php endforeach;?>
                     </tbody>

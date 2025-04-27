@@ -46,4 +46,18 @@ class UserProvider
         $statment->execute();
         return $statment->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function deleteUserById(int $id): bool
+{
+    try {
+        $statement = $this->pdo->prepare(
+            'DELETE FROM users WHERE id = :id'
+        );
+        
+        $result = $statement->execute(['id' => $id]);
+        return $statement->rowCount() > 0;
+    } catch (PDOException $e) {
+        error_log("Error deleting user: " . $e->getMessage());
+        return false;
+    }
+}
 }
