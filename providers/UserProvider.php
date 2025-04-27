@@ -2,10 +2,11 @@
 
 require_once 'model/User.php';
 
-class UserProvider 
+class UserProvider
 {
     private PDO $pdo;
-    public function __construct(PDO $pdo){
+    public function __construct(PDO $pdo)
+    {
         $this->pdo = $pdo;
     }
     public function authUser($login, $password): ?User
@@ -16,11 +17,11 @@ class UserProvider
         $statment->execute([$login]);
         $userData = $statment->fetchObject(User::class, [$login]);
 
-        if(!$userData){
+        if (!$userData) {
             return null;
         }
 
-        if(!password_verify($password, $userData->getPassword())){
+        if (!password_verify($password, $userData->getPassword())) {
             return null;
         }
         return $userData;
@@ -32,9 +33,17 @@ class UserProvider
             'INSERT INTO users (name, login, password) VALUES (:name, :login, :password)'
         );
         return $statment->execute([
-            'name'=>$user->getName(),
-            'login'=>$user->getLogin(),
-            'password'=>$hashedPassword
+            'name' => $user->getName(),
+            'login' => $user->getLogin(),
+            'password' => $hashedPassword
         ]);
+    }
+    public function getAllUsers(): array
+    {
+        $statment = $this->pdo->prepare(
+            'SELECT id, name, login FROM users'
+        );
+        $statment->execute();
+        return $statment->fetchAll(PDO::FETCH_ASSOC);
     }
 }
