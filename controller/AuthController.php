@@ -10,6 +10,7 @@ $userDataFromDB = null;
 
 if(isset($_SESSION['name'])){
     $userData = $_SESSION['name'];
+    $userData = $_SESSION['login'];
     $userDataFromDB = new UserProvider($pdo)->getUserByLogin($_SESSION['login']);
 }
 if(isset($_GET['logout'])){

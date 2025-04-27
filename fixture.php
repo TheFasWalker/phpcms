@@ -13,6 +13,7 @@ require_once 'model/User.php';
    'CREATE TABLE IF NOT EXISTS `tasks` (
    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
    desc VARCHAR(100) NOT NULL,
+   isDone BOOLEAN ,
    author VARCHAR(100) NOT NULL)');
 
 
