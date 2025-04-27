@@ -4,12 +4,13 @@ $pdo = require 'db.php';
 $title='authPage';
 $titleH1 = 'Autorization';
 $userData = null;
-
 session_start();
 $error=null;
+$userDataFromDB = null;
 
 if(isset($_SESSION['name'])){
     $userData = $_SESSION['name'];
+    $userDataFromDB = new UserProvider($pdo)->getUserByLogin($_SESSION['login']);
 }
 
 

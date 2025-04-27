@@ -49,17 +49,33 @@ class UserProvider
         return $statment->fetchAll(PDO::FETCH_ASSOC);
     }
     public function deleteUserById(int $id): bool
-{
-    try {
+    {
+        try {
+            $statement = $this->pdo->prepare(
+                'DELETE FROM users WHERE id = :id'
+            );
+
+            $result = $statement->execute(['id' => $id]);
+            return $statement->rowCount() > 0;
+        } catch (PDOException $e) {
+            error_log("Error deleting user: " . $e->getMessage());
+            return false;
+        }
+    }
+    public function getUserByLogin(string $login): ?User
+    {
         $statement = $this->pdo->prepare(
-            'DELETE FROM users WHERE id = :id'
+            'SELECT id, name, login FROM users WHERE login = ? LIMIT 1'
         );
         
-        $result = $statement->execute(['id' => $id]);
-        return $statement->rowCount() > 0;
-    } catch (PDOException $e) {
-        error_log("Error deleting user: " . $e->getMessage());
-        return false;
+        $statement->execute([$login]);
+        $userData = $statement->fetch(PDO::FETCH_ASSOC);
+        
+        if (!$userData) {
+            return null;
+        }
+        $user = new User($userData['name']);
+        $user->setLogin($userData['login']);      
+        return $user;
     }
-}
 }

@@ -9,6 +9,7 @@ $userList = new UserProvider($pdo)->getAllUsers();
 $userData = null;
 if(isset($_SESSION['name'])){
     $userData = $_SESSION['name'];
+    $userDataFromDB = new UserProvider($pdo)->getUserByLogin($_SESSION['login']);
 }
 
 if (isset($_POST['submit'])){
