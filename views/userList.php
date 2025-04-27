@@ -3,9 +3,41 @@
 
 ?>
  <main class="p-4 md:ml-64 h-auto pt-20"style="height:100vh">
- <h1><?= $titleH1 ?></h1>
- <?php var_dump($userList);?>
+ <?php if($error !== null):?>
+    <div class="flex justify-between">
+        <h1 class=" pb-5 text-xl text-red-500"><?= $titleH1 ?></h1>
+        <span class=" font-bold text-red-500 text-xl"><?= $error ?></span> 
+    </div>
 
+            <?php else: ?>
+                <h1 class=" pb-5 text-xl"><?= $titleH1 ?></h1>
+            <?php endif; ?>
+
+ <form class="w-full mb-5" method="post" action=''>
+
+            <div class="grid grid-cols-3 w-full gap-3">
+        <div >
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <span>Login</span>
+                <input name="login" type="text"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  />
+            </label>
+        </div>
+        <div>
+            <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <span>Name</span>
+                <input name="name" type="text"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  />
+            </label>
+        </div>
+        <div>
+            <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <span>Password</span>
+                <input name="password" type="password"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  />
+            </label>
+        </div>
+            </div>
+
+        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+    </form>
         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
 
             <div class="overflow-x-auto">
