@@ -63,22 +63,38 @@ include __DIR__ . '/../components/header.php';
                             <tr class="border-b dark:border-gray-700">
                                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     <?= $task['id'] ?></th>
-                                <td class="px-4 py-3">
-                                    <?php if ($task['isDone'] == true): ?>
-                                        <a href="/?controller=todolist&toggleState=<?= $task['id'] ?>"
-                                            class=" text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600">Сделано</a>
+                                    <?php if($_SESSION['login']): ?>
+                                        <td class="px-4 py-3">
+                                            <?php if ($task['isDone'] == true): ?>
+                                                <a href="/?controller=todolist&toggleState=<?= $task['id'] ?>"
+                                                    class=" text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600">Сделано</a>
+                                            <?php else: ?>
+                                                <a href="/?controller=todolist&toggleState=<?= $task['id'] ?>"
+                                                    class=" text-white bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 ">
+                                                    Не сделано</a>
+                                                    
+
+                                            <?php endif; ?>
+                                        </td>
                                     <?php else: ?>
-                                        <a href="/?controller=todolist&toggleState=<?= $task['id'] ?>"
-                                            class=" text-white bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 ">
-                                            Не сделано</a>
+                                        <td class="px-4 py-3">
+                                            <?php if($task['isDone'] == true): ?>
+                                                <span class=" text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600">Сделано</span>
+                                            <?php else: ?>
+                                                <span class=" text-white bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 ">Не сделано</span>       
+                                            <?php endif; ?>
+                                        </td>
                                     <?php endif; ?>
-                                </td>
                                 <td class="px-4 py-3"><?= $task['desc'] ?></td>
                                 <td class="px-4 py-3 max-w-[12rem] truncate"></td>
                                 <td class="px-4 py-3">
+                                <?php if($_SESSION['login']): ?>
                                     <a class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                                         href="/?controller=todolist&deleteTask=<?= $task['id'] ?>">delete
                                     </a>
+                                    <?php else: ?>
+                                        <span class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Нужна авторизация</span>
+                                        <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

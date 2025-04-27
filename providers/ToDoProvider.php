@@ -30,7 +30,7 @@ class ToDoProvider
     public function getAllTasks(): array
     {
         $statment = $this->pdo->prepare(
-            'SELECT id, desc, isDone FROM tasks WHERE author = ?'
+            'SELECT id, desc, isDone FROM tasks'
         );
         $statment->execute();
         return $statment->fetchAll(PDO::FETCH_ASSOC);
