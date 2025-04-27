@@ -15,16 +15,18 @@ class UserProvider
             'SELECT name, login, password FROM users WHERE login = ?'
         );
         $statment->execute([$login]);
-        $userData = $statment->fetchObject(User::class, [$login]);
+        $userData = $statment->fetch(PDO::FETCH_ASSOC);
 
         if (!$userData) {
             return null;
         }
 
-        if (!password_verify($password, $userData->getPassword())) {
+        if (!password_verify($password, $userData['password'])) {
             return null;
         }
-        return $userData;
+        $UserFromBD = new User($userData['name']);
+        $UserFromBD->setLogin($userData['login']);
+        return $UserFromBD;
     }
     public function registerUser(User $user, string $password): bool
     {
